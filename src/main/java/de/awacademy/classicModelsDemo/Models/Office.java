@@ -144,6 +144,19 @@ public class Office {
         this.employeeList = employeeList;
     }
 
+    public String fullAddress() {
+
+        if (addressLine2 == null && state == null) {
+            return addressLine1 + ", " +  country + ", " + postalCode;
+        } else if (addressLine2 == null) {
+            return  addressLine1 + ", " + state + ", " + country + ", " + postalCode;
+        } else if (state == null) {
+            return addressLine1 + ", " + addressLine2 + ", " + country + ", " + postalCode;
+        } else {
+            return addressLine1 + ", " + addressLine2 + ", " + state + ", " + country + ", " + postalCode;
+        }
+    }
+
     @Override
     public String toString() {
         return "Office{" +
