@@ -99,6 +99,12 @@ public class Employee {
         return firstName + " " + lastName;
     }
 
+    public String getBossName() {
+        if (boss == null) {
+            return "";
+        } return boss.firstName + " " + boss.lastName;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
