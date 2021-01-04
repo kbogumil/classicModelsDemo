@@ -25,6 +25,9 @@ public class MainController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private EmployeeService employeeService1;
+
 
     // Example to show that everything still works, even when we don't use a DB connection
     @GetMapping("/dummy")
@@ -49,13 +52,24 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/employee")
+    public String employee(HttpServletRequest request, Model model) {
+
+        List<Employee> employeeList = employeeService.getAllEmployees();
+
+        model.addAttribute("employees", employeeList);
+
+        return "employee";
+    }
+
     @GetMapping("/office")
     public ModelAndView employees(HttpServletRequest request) {
 
         String officeCode = request.getParameter("code");
         Office office = officeService.getOfficeById(officeCode);
 
-        List<Employee> employeeList = employeeService.getAllEmployees();
+//        List<Employee> employeeList = employeeService.getAllEmployees();
+        List<Employee> employeeList = office.getEmployeeList();
 
 
         // Instead of letting Hibernate pick the file automatically by returning a string
@@ -68,5 +82,4 @@ public class MainController {
 
         return model;
     }
-
 }
